@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { PastLaunches } from './components/PastLaunches';
+import { UpcomingLaunches } from './components/UpcomingLaunches';
+import { NextAndLastLaunches } from './components/NextAndLast';
+import { NavMenu } from './components/NavMenu'
+import { Route, Routes } from 'react-router-dom';
+import { Container } from 'reactstrap';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container>
+        <NavMenu></NavMenu>
+        <Routes>
+          <Route path='/' element={<UpcomingLaunches />} />
+          <Route path='/past' element={<PastLaunches />} />
+          <Route path='/close' element={<NextAndLastLaunches />} />
+
+        </Routes>
+
+      </Container>
     </div>
   );
 }
