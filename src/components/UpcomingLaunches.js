@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Spinner } from 'reactstrap';
 import { LaunchGroup } from './LaunchGroup';
+import getDataFromEndpoint from '../lib/apiWrapper';
 
 export class UpcomingLaunches extends Component {
 
@@ -37,9 +38,7 @@ export class UpcomingLaunches extends Component {
     }
 
     async populateLaunchData() {
-        const response = await fetch('upcomingLaunches');
-        console.log(response);
-        const data = await response.json();
+        const data = await getDataFromEndpoint('/upcomingLaunches');
         this.setState({ launches: data, loading: false });
       }
 }

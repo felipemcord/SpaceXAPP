@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Spinner, Container, Row, Col } from 'reactstrap';
 import { LaunchCard } from './LaunchCard';
+import getDataFromEndpoint from '../lib/apiWrapper';
 
 export class NextAndLastLaunches extends Component {
 
@@ -25,18 +26,12 @@ export class NextAndLastLaunches extends Component {
             <div>
                 <Container>
                     <Row>
-                        <Col>
+                        <Col sm='12' lg='6' >
                             <h3>Last Launch</h3>
-                        </Col>
-                        <Col>
-                            <h3>Next Launch</h3>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
                             {contentsLast}
                         </Col>
-                        <Col>
+                        <Col sm='12' lg='6' >
+                            <h3>Next Launch</h3>
                             {contentsNext}
                         </Col>
                     </Row>
@@ -46,16 +41,12 @@ export class NextAndLastLaunches extends Component {
     }
 
     async populateLastLaunchData() {
-        const response = await fetch('lastLaunch');
-        const data = await response.json();
-        console.log(data);
+        const data = await getDataFromEndpoint('/lastLaunch');
         this.setState({ lastLaunch: data, loadingLast: false });
       }
 
       async populateNextLaunchData() {
-          const response = await fetch('nextLaunch');
-          const data = await response.json();
-          console.log(data);
+          const data = await getDataFromEndpoint('/nextLaunch');
           this.setState({ nextLaunch: data, loadingNext: false });
         }
 }
